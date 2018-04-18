@@ -6,7 +6,11 @@ import traceback
 class myAHRS_plus:
     def __init__(self, serial_device):
         self.serial_port = serial.Serial(serial_device, 115200, timeout=1.0)
-
+        # Data transfer mode : ASCII, TRIGGER
+        self.send_command('mode,AT')
+        # Select output message type
+        self.send_command('asc_out,RPYIMU')
+    
     def send_command(self, cmd_msg):
         cmd_msg = '@' + cmd_msg.strip()
         crc = 0
